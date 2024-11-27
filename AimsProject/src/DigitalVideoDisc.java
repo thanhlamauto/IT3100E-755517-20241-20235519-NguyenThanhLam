@@ -56,6 +56,12 @@ public class DigitalVideoDisc {
         this.cost = cost;
         this.id = ++nbDigitalVideoDiscs;
     }
+    public int getId() {
+        return id;
+    }
+    public boolean isMatch(String title) {
+        return this.title.toLowerCase().contains(title.toLowerCase());
+    }
     
     
     
