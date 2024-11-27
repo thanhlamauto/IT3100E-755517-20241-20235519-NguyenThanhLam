@@ -55,4 +55,8 @@ public class DigitalVideoDisc {
 
     }
 
+	public void setTitle(String title2) {
+		this.title = title2;
+	}
+
 }
