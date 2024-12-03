@@ -56,6 +56,10 @@ public abstract class Media implements Comparable<Media> {
         return this.getTitle().toLowerCase().contains(title.toLowerCase());
     }
 
+    public void play() {
+        System.out.println("Playing media");
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -74,6 +78,7 @@ public abstract class Media implements Comparable<Media> {
                 " - Cost: " + this.getCost() + "$";
     }
 
+    // Answer for the second question
     @Override
     public int compareTo(Media other) {
         int titleComparison = this.getTitle().compareTo(other.getTitle());
