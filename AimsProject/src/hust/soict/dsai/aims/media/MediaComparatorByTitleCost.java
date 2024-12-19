@@ -14,4 +14,6 @@ public class MediaComparatorByTitleCost implements Comparator<Media> {
         return Double.compare(o2.getCost(), o1.getCost());
     }
 
+
+        
 }

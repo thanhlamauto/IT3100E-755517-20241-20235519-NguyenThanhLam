@@ -1,16 +1,8 @@
-package hust.soict.dsai.swing;
+package GUIProject.src.hust.soict.dsai.swing;
 
-import java.awt.BorderLayout;
-import java.awt.ComponentOrientation;
-import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class NumberGrid extends JFrame {
     private JButton[] btnNumbers = new JButton[10];
@@ -18,15 +10,16 @@ public class NumberGrid extends JFrame {
     private JTextField tfDisplay;
 
     public NumberGrid() {
+
         tfDisplay = new JTextField();
+        tfDisplay.setPreferredSize(new Dimension(200, 30));
         tfDisplay.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
-        JPanel panelButtons = new JPanel(new GridLayout(4, 3));
+        JPanel panelButtons = new JPanel(new GridLayout(4,3));
         addButtons(panelButtons);
 
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
-
         cp.add(tfDisplay, BorderLayout.NORTH);
         cp.add(panelButtons, BorderLayout.CENTER);
 
@@ -35,39 +28,56 @@ public class NumberGrid extends JFrame {
         setSize(200, 200);
         setVisible(true);
     }
+
+    public static void main(String[] args) {
+        new NumberGrid();
+    }
+
     void addButtons(JPanel panelButtons) {
-        ButtonListener btnListener = new ButtonListener(); 
-    
+        ButtonListener btnListener = new ButtonListener();
         for (int i = 1; i <= 9; i++) {
-            btnNumbers[i] = new JButton("" + i); 
+            btnNumbers[i] = new JButton(""+i);
             panelButtons.add(btnNumbers[i]);
-            btnNumbers[i].addActionListener(btnListener); 
+            btnNumbers[i].addActionListener(btnListener);
         }
-    
+
         btnDelete = new JButton("DEL");
         panelButtons.add(btnDelete);
         btnDelete.addActionListener(btnListener);
-    
+
         btnNumbers[0] = new JButton("0");
         panelButtons.add(btnNumbers[0]);
         btnNumbers[0].addActionListener(btnListener);
-    
+
         btnReset = new JButton("C");
         panelButtons.add(btnReset);
         btnReset.addActionListener(btnListener);
     }
+
     private class ButtonListener implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String button = e.getActionCommand(); 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String button = e.getActionCommand();
             if (button.charAt(0) >= '0' && button.charAt(0) <= '9') {
                 tfDisplay.setText(tfDisplay.getText() + button);
             } else if (button.equals("DEL")) {
-                // Handles the "DEL" case
+                String deleteString = tfDisplay.getText();
+                if (deleteString.length() > 0) {
+                    deleteString = deleteString.substring(0, deleteString.length() - 1);
+                }                
+                tfDisplay.setText(deleteString);
             } else {
-                // Handles the "C" case
+                tfDisplay.setText("");
             }
-        }
+		}
+        
     }
+    public static String delLastCharacter(String str) {
+        if ((str != null) && (str.length() > 0)) {
+           return str.substring(0, str.length() - 1);
+        }
+        return null;
+ }
+
 }
